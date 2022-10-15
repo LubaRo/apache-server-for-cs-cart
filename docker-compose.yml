@@ -1,0 +1,47 @@
+version: "3.1"
+
+services:
+  php7.4_apache:
+    build:
+      context: ./configs/php7.4
+      dockerfile: Dockerfile
+    container_name: php7.4_apache
+    volumes:
+      - ./www:/var/www/html/
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - mysql
+      - phpmyadmin
+      - mailhog
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    restart: always
+    ports:
+      - 8010:80
+
+  mailhog:
+    image: mailhog/mailhog
+    logging:
+      driver: 'none'  # disable saving logs
+    ports:
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui

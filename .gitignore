@@ -1,0 +1,5 @@
+www/*
+!www/phpinfo.php
+
+db_data/*
+!db_data/.gitignore
