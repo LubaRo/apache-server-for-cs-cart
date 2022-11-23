@@ -1,5 +1,7 @@
 www/*
 !www/phpinfo.php
 
-db_data/*
-!db_data/.gitignore
+db/*
+!db/backups/.gitignore
+!db/data/.gitignore
+!db/.gitignore

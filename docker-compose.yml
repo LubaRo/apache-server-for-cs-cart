@@ -1,11 +1,22 @@
 version: "3.1"
 
 services:
-  php7.4_apache:
+  php5.6_apache:
     build:
-      context: ./configs/php7.4
+      context: ./configs/php5.6
       dockerfile: Dockerfile
-    container_name: php7.4_apache
+    container_name: php5.6_apache
+    volumes:
+      - ./www:/var/www/html/
+    ports:
+      - 80:80
+      - 443:443
+
+  php7.0_apache:
+    build:
+      context: ./configs/php7.0
+      dockerfile: Dockerfile
+    container_name: php7.0_apache
     volumes:
       - ./www:/var/www/html/
     ports:
@@ -16,12 +27,56 @@ services:
       - phpmyadmin
       - mailhog
 
+  php7.1_apache:
+    build:
+      context: ./configs/php7.1
+      dockerfile: Dockerfile
+    container_name: php7.1_apache
+    volumes:
+      - ./www:/var/www/html/
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - mysql
+      - phpmyadmin
+      - mailhog
+
+  php7.4_apache:
+    build:
+      context: ./configs/php7.4
+      dockerfile: Dockerfile
+    container_name: php7.4_apache
+    volumes:
+      - ./www:/var/www/html/
+    ports:
+      - 80:80
+      - 443:443
+    network_mode: host
+    depends_on:
+      - mysql
+      - phpmyadmin
+      - mailhog
+      - adminer
+
   mysql:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
-      - ./db_data:/var/lib/mysql
+      - ./db/data/mysql57:/var/lib/mysql
+      - ./db/backups:/_backups
+      - ./configs/db/my.cnf:/etc/my.cnf
+    ports:
+      - "3306:3306"
+
+  mysql8:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db/data/mysql8:/var/lib/mysql
+      - ./db/backups:/_backups
     ports:
       - "3306:3306"
 
@@ -37,6 +92,12 @@ services:
     restart: always
     ports:
       - 8010:80
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
 
   mailhog:
     image: mailhog/mailhog
