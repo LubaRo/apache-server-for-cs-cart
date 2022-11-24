@@ -48,3 +48,29 @@ Password: `root`
 - Apache web server available on localhost with ports 80 and 443.
 - Mailhog web interface: http://localhost:8025/
 - PhpMyAdmin web interface: http://localhost:8010/
+
+
+## XDebug
+
+XDebug configuration specifieced for php 7.4 in `configs/php7.4/docker-php-ext-xdebug.ini`
+To setup it in VSCode install `PHP Debug` extension and specify for each store the next settings in `www/<app_name>/.vscode/launch.json`
+
+```json
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Listen for Xdebug",
+            "type": "php",
+            "request": "launch",
+            "port": 9003,
+            "pathMappings": {
+                "/var/www/html/<app_name>": "${workspaceFolder}"
+            }
+        }
+    ]
+}
+```
