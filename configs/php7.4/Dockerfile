@@ -38,3 +38,5 @@ RUN apt-get update \
 # enable ssl module and enable the default-ssl site
 RUN a2enmod ssl \
  && a2ensite default-ssl
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
