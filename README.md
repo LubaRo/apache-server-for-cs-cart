@@ -29,7 +29,7 @@ The root directory `www`. So put the cs-cart files there.
 There is Mailhog included. So to catch the emails by mailhog setup the cs-cart store in admin panel. Go to `Settings -> E-mails` and setup next fields:
 
 - `Method of sending e-mails:` -> `via SMTP server`
-- `SMTP host` -> `mailhog:1025`
+- `SMTP host` -> `127.0.0.1:1025`
 
 ## Database
 
