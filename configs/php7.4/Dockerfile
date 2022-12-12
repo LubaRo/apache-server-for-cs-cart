@@ -18,6 +18,7 @@ RUN set -xe; \
         git \
         zip unzip \
         curl \
+        zlib1g \
         libzip-dev libcurl4-gnutls-dev libpng-dev libxml2-dev libjpeg-dev libfreetype6-dev \
         libmagickwand-dev; \
     docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/; \
@@ -25,8 +26,9 @@ RUN set -xe; \
     pecl install imagick; \
     docker-php-ext-enable imagick; \
     docker-php-ext-enable mysqli; \
-    pecl install xdebug; \
-    docker-php-ext-enable xdebug;
+    #pecl install xdebug; \
+    #docker-php-ext-enable xdebug; \
+    docker-php-ext-install calendar && docker-php-ext-enable calendar;
 
 RUN a2enmod rewrite;
 
