@@ -26,8 +26,8 @@ RUN set -xe; \
     pecl install imagick; \
     docker-php-ext-enable imagick; \
     docker-php-ext-enable mysqli; \
-    #pecl install xdebug; \
-    #docker-php-ext-enable xdebug; \
+    pecl install xdebug-3.1.2; \
+    docker-php-ext-enable xdebug; \
     docker-php-ext-install calendar && docker-php-ext-enable calendar;
 
 RUN a2enmod rewrite;
