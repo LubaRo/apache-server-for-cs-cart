@@ -1,4 +1,4 @@
-FROM php:7.0-apache
+FROM php:7.2-apache
 
 ENV VERSION_ONIG=6.9.3
 ENV ONIG_BUILD_DIR=/tmp/oniguruma
@@ -14,9 +14,9 @@ RUN set -xe;\
 
 RUN curl -o ioncube.tar.gz http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
     && tar -xvvzf ioncube.tar.gz \
-    && mv ioncube/ioncube_loader_lin_7.0.so `php-config --extension-dir` \
+    && mv ioncube/ioncube_loader_lin_7.2.so `php-config --extension-dir` \
     && rm -Rf ioncube.tar.gz ioncube \
-    && docker-php-ext-enable ioncube_loader_lin_7.0
+    && docker-php-ext-enable ioncube_loader_lin_7.2
 
 RUN set -xe; \
     apt-get update; \
@@ -27,12 +27,12 @@ RUN set -xe; \
         zlib1g \
         libzip-dev libcurl4-gnutls-dev libpng-dev libxml2-dev libjpeg-dev libfreetype6-dev \
         libmagickwand-dev; \
-    docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/; \
+    docker-php-ext-configure gd; \
     docker-php-ext-install pdo_mysql mysqli gd json zip intl soap mbstring exif bcmath curl sockets; \
     pecl install imagick; \
     docker-php-ext-enable imagick; \
     docker-php-ext-enable mysqli; \
-    pecl install xdebug-2.7.0; \
+    pecl install xdebug-3.1.2; \
     docker-php-ext-enable xdebug; \
     docker-php-ext-install calendar && docker-php-ext-enable calendar;
 
@@ -46,3 +46,5 @@ RUN apt-get update \
 # enable ssl module and enable the default-ssl site
 RUN a2enmod ssl \
  && a2ensite default-ssl
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

@@ -11,6 +11,7 @@ services:
     ports:
       - 80:80
       - 443:443
+    network_mode: host
 
   php7.0_apache:
     build:
@@ -22,6 +23,7 @@ services:
     ports:
       - 80:80
       - 443:443
+    network_mode: host
     depends_on:
       - mysql
       - phpmyadmin
@@ -37,6 +39,23 @@ services:
     ports:
       - 80:80
       - 443:443
+    network_mode: host
+    depends_on:
+      - mysql
+      - phpmyadmin
+      - mailhog
+
+  php7.2_apache:
+    build:
+      context: ./configs/php7.2
+      dockerfile: Dockerfile
+    container_name: php7.2_apache
+    volumes:
+      - ./www:/var/www/html/
+    ports:
+      - 80:80
+      - 443:443
+    network_mode: host
     depends_on:
       - mysql
       - phpmyadmin
