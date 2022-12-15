@@ -8,13 +8,13 @@ build_70:
 	docker compose up --build php7.0_apache mysql phpmyadmin adminer mailhog
 
 up_70:
-	docker compose up --build php7.0_apache mysql phpmyadmin adminer mailhog
+	docker compose up php7.0_apache mysql phpmyadmin adminer mailhog
 
 build_72:
 	docker compose up --build php7.2_apache mysql phpmyadmin adminer mailhog
 
 up_72:
-	docker compose up --build php7.2_apache mysql phpmyadmin adminer mailhog
+	docker compose up php7.2_apache mysql phpmyadmin adminer mailhog
 
 bash:
 	docker compose run --rm php7.4_apache /bin/bash	
