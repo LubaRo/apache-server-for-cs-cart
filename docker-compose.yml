@@ -52,6 +52,7 @@ services:
     container_name: php7.2_apache
     volumes:
       - ./www:/var/www/html/
+      - ./configs/php7.2/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     ports:
       - 80:80
       - 443:443
