@@ -64,6 +64,24 @@ services:
       - phpmyadmin
       - mailhog
 
+  php7.3_apache:
+    build:
+      context: ./configs/php7.3
+      dockerfile: Dockerfile
+    container_name: php7.3_apache
+    volumes:
+      - ./www:/var/www/html/
+      - ./configs/php7.3/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    ports:
+      - 80:80
+      - 443:443
+    network_mode: host
+    depends_on:
+      - mysql
+      - phpmyadmin
+      - mailhog
+      - adminer
+
   php7.4_apache:
     build:
       context: ./configs/php7.4
