@@ -1,6 +1,18 @@
 version: "3.1"
 
 services:
+  php5.3_apache:
+    build:
+      context: ./configs/php5.3
+      dockerfile: Dockerfile
+    container_name: php5.3_apache
+    volumes:
+      - ./www:/var/www/html/
+    ports:
+      - 80:80
+      - 443:443
+    network_mode: host
+
   php5.6_apache:
     build:
       context: ./configs/php5.6
