@@ -150,6 +150,8 @@ services:
   adminer:
     image: adminer
     restart: always
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql
     ports:
       - 8080:8080
 
