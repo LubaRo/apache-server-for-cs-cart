@@ -42,7 +42,7 @@ services:
     depends_on:
       - mysql
       - phpmyadmin
-      - mailhog
+      - mailpit
 
   php7.1_apache:
     build:
@@ -58,7 +58,7 @@ services:
     depends_on:
       - mysql
       - phpmyadmin
-      - mailhog
+      - mailpit
 
   php7.2_apache:
     build:
@@ -75,7 +75,7 @@ services:
     depends_on:
       - mysql
       - phpmyadmin
-      - mailhog
+      - mailpit
 
   php7.3_apache:
     build:
@@ -92,7 +92,7 @@ services:
     depends_on:
       - mysql
       - phpmyadmin
-      - mailhog
+      - mailpit
       - adminer
 
   php7.4_apache:
@@ -110,7 +110,7 @@ services:
     depends_on:
       - mysql
       - phpmyadmin
-      - mailhog
+      - mailpit
       - adminer
 
   mysql:
@@ -156,8 +156,8 @@ services:
     ports:
       - 8080:8080
 
-  mailhog:
-    image: mailhog/mailhog
+  mailpit:
+    image: axllent/mailpit
     logging:
       driver: 'none'  # disable saving logs
     ports:
